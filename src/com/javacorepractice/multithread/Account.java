@@ -42,6 +42,7 @@ public class Account {
         this.balance = balance;
     }
 
+    /*
     @Override
     public String toString() {
         return "Account{" +
@@ -50,7 +51,7 @@ public class Account {
                 ", accountType='" + accountType + '\'' +
                 ", balance=" + balance +
                 '}';
-    }
+    }*/
 
     public Account(String accountNo, String accountHolder, String accountType, Double balance) {
         this.accountNo = accountNo;
