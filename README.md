@@ -1,11 +1,16 @@
-# JavaCorePractice
+# Core Java 
 
-**Multi Threading** 
-**Collection Framework** 
-**Reflection** 
-**Regular Expressions** 
-**Design Patterns**
-**XML Parsing**
-**Reusable Executable Jars**
+**Multi Threading**
  
+**Collection Framework** 
 
+**Reflection** 
+
+**Regular Expressions** 
+
+**Design Patterns**
+
+**Parsing Techniques**
+
+**Reusable Components**
+ 
