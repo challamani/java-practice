@@ -1,9 +1,9 @@
-package com.core_java_practice.multithread;
+package com.core_java_practice.multithread.examples.banking;
 
 /**
  * Created by Manikanta Challa on 30-Mar-18.
  */
-public class Account {
+public class SynchronizeAccount {
 
     private String accountNo;
     private String accountHolder;
@@ -42,7 +42,6 @@ public class Account {
         this.balance = balance;
     }
 
-    /*
     @Override
     public String toString() {
         return "Account{" +
@@ -51,16 +50,16 @@ public class Account {
                 ", accountType='" + accountType + '\'' +
                 ", balance=" + balance +
                 '}';
-    }*/
+    }
 
-    public Account(String accountNo, String accountHolder, String accountType, Double balance) {
+    public SynchronizeAccount(String accountNo, String accountHolder, String accountType, Double balance) {
         this.accountNo = accountNo;
         this.accountHolder = accountHolder;
         this.accountType = accountType;
         this.balance = balance;
     }
 
-    public double doWithdraw(double amount) throws Exception{
+    public synchronized Double doWithdraw(double amount) throws Exception{
         if(amount > this.getBalance()){
             throw new Exception("Insufficient funds");
         }
@@ -70,12 +69,12 @@ public class Account {
     }
 
 
-    public double doDeposite(double amount) throws Exception{
+    public synchronized Double doDeposit(double amount) throws Exception{
         if(0 > amount){
             throw new Exception("Invalid amount, must be positive integer");
         }
 
-        //this.balance += amount;
-        return this.balance += amount;
+        this.balance += amount;
+        return this.balance;
     }
 }

@@ -1,4 +1,4 @@
-package com.core_java_practice.multithread;
+package com.core_java_practice.multithread.examples.banking;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,25 +24,22 @@ public class SynchronizedExec {
         //functional programming, lambda expression, anonymous call.  
 		new Thread( () -> {
 			try{
-				logger.info("lambda avail balance:"+ account.doDeposite(100.00));
+				logger.info("lambda avail balance:"+ account.doDeposit(100.00));
 			}catch (Exception e) {
 				
 			}
 			
 		} ).start(); 
 		
-		Thread waitingThread = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try{
-		        	Thread.sleep(5000);
-		        }catch(Exception e){
-		        	logger.log(Level.SEVERE,"exception in join:"+e.getMessage());
-		        }
+		Thread waitingThread = new Thread(() -> {
+			try{
+				Thread.sleep(5000);
+			}catch(Exception e){
+				logger.log(Level.SEVERE,"exception in join:"+e.getMessage());
 			}
 		});
-        
-        //let us assume above threads getting finished its taks within 5 minutes.
+
+        //let us assume above threads getting finished -- its task within 5 minutes.
         try{
         	waitingThread.start();
         	waitingThread.join();

@@ -1,4 +1,4 @@
-package com.core_java_practice.multithread.socket_programming;
+package com.core_java_practice.multithread.examples.socket_programming;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Server
 {
@@ -21,8 +22,9 @@ public class Server
                 DataInputStream dis = new DataInputStream(client.getInputStream());
                 DataOutputStream dos = new DataOutputStream(client.getOutputStream());
 
-                System.out.println("Assign request to client-handler");
+                System.out.println("Assign request to client-handler thread");
                 Thread thread = new ClientHandler(client, dis, dos);
+                thread.setName("client-handler-thread-"+client.toString());
                 thread.start();
             } catch (Exception e) {
                 client.close();
@@ -59,7 +61,8 @@ class ClientHandler extends Thread
             exception.printStackTrace();
         }
 
-        while (true)
+        AtomicBoolean clientDown = new AtomicBoolean(false);
+        while (!clientDown.get())
         {
             try {
                 received = dataInputStream.readUTF();
@@ -78,6 +81,7 @@ class ClientHandler extends Thread
                 dataOutputStream.writeUTF(respond);
 
             } catch (IOException e) {
+                clientDown.set(true);
                 e.printStackTrace();
             }
         }

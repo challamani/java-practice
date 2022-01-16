@@ -1,4 +1,4 @@
-package com.core_java_practice.multithread;
+package com.core_java_practice.multithread.examples.banking;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -1,25 +1,27 @@
-package com.core_java_practice.multithread;
+package com.core_java_practice.multithread.examples.banking;
 
 import java.util.logging.Logger;
 
-public class SyncDepositThread extends Thread {
-
+/**
+ * Created by Manikanta Challa on 30-Mar-18.
+ */
+public class DepositThread extends Thread {
 
     final static Logger logger = Logger.getLogger(DepositThread.class.getSimpleName());
 
-    private SynchronizeAccount account;
+    private Account account;
     private double depositAmount;
-    public SyncDepositThread(SynchronizeAccount account,String threadName,double depositAmount){
+    public DepositThread(Account account,String threadName,double depositAmount){
         super(threadName);
         this.account = account;
         this.depositAmount = depositAmount;
     }
 
-    public SynchronizeAccount getAccount() {
+    public Account getAccount() {
         return account;
     }
 
-    public void setAccount(SynchronizeAccount account) {
+    public void setAccount(Account account) {
         this.account = account;
     }
 

@@ -1,4 +1,4 @@
-package com.core_java_practice.multithread.socket_programming;
+package com.core_java_practice.multithread.examples.socket_programming;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -33,11 +33,10 @@ public class Client
                         receiveStatus.set(false);
                     }
                 }
-            });
+            }, "server-message-receiver");
             receiverThread.start();
 
             AtomicBoolean responseStatus = new AtomicBoolean(true);
-
             Thread respondThread = new Thread(() -> {
                 while (responseStatus.get()) {
                     try {
@@ -59,8 +58,7 @@ public class Client
                         responseStatus.set(false);
                     }
                 }
-            });
-
+            },"respond-thread");
             respondThread.start();
 
         } catch (Exception e) {
