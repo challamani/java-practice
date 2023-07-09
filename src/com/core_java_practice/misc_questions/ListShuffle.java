@@ -11,7 +11,7 @@ public class ListShuffle {
         randomPhoneNumberMask();
         System.out.println("Current DateTime :: " + getCurrentDateTime("yyyy-MM-dd'T'HH:mm:ss"));
         String amountToDebit = "56.06";
-        Integer amountToPaymentGateway = new Double(Double.parseDouble(amountToDebit) * 100).intValue();
+        Integer amountToPaymentGateway = Double.valueOf(Double.parseDouble(amountToDebit) * 100).intValue();
         System.out.println(amountToPaymentGateway);
     }
 

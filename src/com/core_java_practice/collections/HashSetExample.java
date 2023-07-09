@@ -10,7 +10,7 @@ public class HashSetExample {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Set<Employee> set  = new HashSet<>();
-		set.add(new Employee("Sai Sree","A",24));
+		set.add(new Employee("Sree","A",24));
 		set.add(new Employee("Mani","B",27));
 		set.add(new Employee("Mani","B",27));
 				
@@ -19,8 +19,8 @@ public class HashSetExample {
 		}
 		
 		Map<String, Employee> employeeMap = new HashMap<String,Employee>();
-		employeeMap.put("A", new Employee("Sai Sree","A",24));
-		employeeMap.put("B", new Employee("Sai Sree","B",24));
+		employeeMap.put("A", new Employee("Sree","A",24));
+		employeeMap.put("B", new Employee("Sree","B",24));
 		
 		
 		for(Map.Entry<String,Employee> entry: employeeMap.entrySet()){

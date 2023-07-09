@@ -9,7 +9,7 @@ import java.util.Set;
  * **Problem statement**:
  * 
  * Bob the Adventurer is one step away from solving the mystery of an ancient Mayan tomb. 
- * He just approched the secret chamber where the secret Mayan scriptures are locked in a chest. 
+ * He just approached the secret chamber where the secret Mayan scriptures are locked in a chest.
  * 
  * There are N ancient statues in the room. After long thought,Bob figured out that in order to open the treasure chest he needs to stand in the middle of the room and hit every statue with a laser ray at the same time. 
  * Bob is a highly experienced adventurer, so setting multiple laser rays at the same time is not a problem for him. 
@@ -34,7 +34,7 @@ public class Statue {
 	public static void main(String args[]){
 		
 		Scanner sc = new Scanner(System.in);
-		int statue =sc.nextInt();
+		int statue = sc.nextInt();
 		int i=0;
 		List<Coordinate> quarter1 = new ArrayList<>();
 		List<Coordinate> quarter2 = new ArrayList<>();
@@ -68,7 +68,8 @@ public class Statue {
 	}
 	
 	private static int getUniqueSlopeSetCnt(List<Coordinate> quarter){
-		
+
+		//Because of the centre coordinate values are (0,0) the slope formula becomes y2-y1/x2-x1 = y/x
 		Set<Float> uniqueSlopeSet = new HashSet<>();
 		for(Coordinate coordinate:quarter){
 			 uniqueSlopeSet.add(coordinate.getY() / coordinate.getX());
@@ -80,32 +81,36 @@ public class Statue {
 	
 }
 
-class Coordinate{
-	
+class Coordinate {
+
 	private float x;
 	private float y;
-	
+
 	public Coordinate(float x, float y) {
 		super();
 		this.x = x;
 		this.y = y;
 	}
+
 	public float getX() {
 		return x;
 	}
+
 	public void setX(float x) {
 		this.x = x;
 	}
+
 	public float getY() {
 		return y;
 	}
+
 	public void setY(float y) {
 		this.y = y;
 	}
+
 	@Override
 	public String toString() {
 		return "Coordinate [x=" + x + ", y=" + y + "]";
 	}
-	
-	
+
 }

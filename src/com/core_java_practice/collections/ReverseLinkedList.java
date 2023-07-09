@@ -3,19 +3,19 @@ package com.core_java_practice.collections;
 public class ReverseLinkedList {
 
 
-    public static void main(String[] args){
-        Node head = new Node("Apple",null);
+    public static void main(String[] args) {
+        Node head = new Node("Apple", null);
         Node current = head;
-        String[] elements = {"Orange","Banana","Mango","Grape","Guava"};
+        String[] elements = {"Orange", "Banana", "Mango", "Grape", "Guava"};
 
-        for(String s:elements){
-            Node temp = new Node(s,null);
+        for (String s : elements) {
+            Node temp = new Node(s, null);
             current.setNext(temp);
             current = temp;
         }
 
-        current=head;
-        while (current.getNext() !=null){
+        current = head;
+        while (current.getNext() != null) {
             System.out.print(current.getData().concat("-->"));
             current = current.getNext();
         }
@@ -25,7 +25,7 @@ public class ReverseLinkedList {
         //reverse the linked-list
         current = head;
         Node previous = null;
-        while (current!=null) {
+        while (current != null) {
             Node next = current.getNext();
             current.setNext(previous);
             previous = current;
@@ -33,7 +33,7 @@ public class ReverseLinkedList {
         }
 
         current = previous;
-        while (current.getNext() !=null){
+        while (current.getNext() != null) {
             System.out.print(current.getData().concat("-->"));
             current = current.getNext();
         }
