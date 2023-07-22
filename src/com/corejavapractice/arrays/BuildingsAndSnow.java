@@ -1,57 +1,121 @@
 package com.corejavapractice.arrays;
 
+
 import java.util.Arrays;
 import java.util.Scanner;
+import com.corejavapractice.MyTechHub;
+public class BuildingsAndSnow implements MyTechHub {
 
-public class BuildingsAndSnow {
+    @Override
+    public String getProblem() {
+        return "Find the maximum captured snow quantity in between series of buildings";
+    }
 
-    public static void main(String[] args) {
+    @Override
+    public String getApproach() {
+        return "A dynamic programming," +
+                " \ncalculate max building height at each index left to right and right to left,\n2nd max at each building is the peak of captured snow?";
+    }
+    //TODO Calculate maximum snow quantity captured in between series of buildings
+    public long calculateMaximumSnowQuantity(int[] buildingHeights){
+        long maxSnowQuantity=0l;
+        int[] left_max = new int[buildingHeights.length];
+        int[] right_max = new int[buildingHeights.length];
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Number of building in series:?");
-        int numberOfBuilds = sc.nextInt();
-        int[] buildingHeight = new int[numberOfBuilds];
-
-        int[] leftMax = new int[numberOfBuilds];
-        int[] rightMax = new int[numberOfBuilds];
-
-        int index = 0;
-        int left_max = Integer.MIN_VALUE;
-        System.out.println("Enter corresponding heights:");
-        while (index < numberOfBuilds) {
-            buildingHeight[index] = sc.nextInt();
-            if (left_max < buildingHeight[index]) {
-                left_max = buildingHeight[index];
+        int index=0;
+        int leftMaxVal = Integer.MIN_VALUE;
+        while (index < buildingHeights.length){
+            if(leftMaxVal < buildingHeights[index]){
+                leftMaxVal = buildingHeights[index];
             }
-            leftMax[index] = left_max;
+            left_max[index] = leftMaxVal;
             index++;
         }
 
-        index = numberOfBuilds - 1;
-        int right_max = Integer.MIN_VALUE;
-        while (0 < index) {
-            if (right_max < buildingHeight[index]) {
-                right_max = buildingHeight[index];
+        index = buildingHeights.length-1;
+        int rightMaxVal = Integer.MIN_VALUE;
+        while (index >= 0){
+            if(rightMaxVal < buildingHeights[index]){
+                rightMaxVal = buildingHeights[index];
             }
-            rightMax[index] = right_max;
+            right_max[index] = rightMaxVal;
             index--;
         }
 
-        System.out.println("<<< building heights :: " + Arrays.toString(buildingHeight));
-        System.out.println("<<< left max :: " + Arrays.toString(leftMax));
-        System.out.println("<<< right max ::" + Arrays.toString(rightMax));
+        //Now calculate the maximum captured snow in between buildings
+        for (int i=0; i< buildingHeights.length; i++){
+            int maxTwo  = Math.min(left_max[i], right_max[i]);
+            maxSnowQuantity += (maxTwo - buildingHeights[i]);
+        }
+        displayBuildingBlocks(buildingHeights, left_max, right_max);
+        return  maxSnowQuantity;
+    }
+    protected void clearScreen() {
+        try {
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+        } catch (Exception ex) {
+            System.out.println("exception : "+ex.getMessage());
+        }
+    }
 
-        long snowQuantity = 0l;
-        index = 0;
-        while (index < numberOfBuilds) {
+    protected  void delay(int milliSec) {
+        try {
+            Thread.sleep(milliSec);
+        } catch (InterruptedException ie) {
 
-            int min = Math.min(leftMax[index], rightMax[index]);
-            System.out.println(String.format("min: %d and (%d-%d) = %d",
-                    min, buildingHeight[index], min, min - buildingHeight[index]));
-
-            snowQuantity += (min - buildingHeight[index]);
+        }
+    }
+    private void displayBuildingBlocks(int[] buildingHeights, int[] leftMax, int[] rightMax) {
+        clearScreen();
+        int verticalMax = Math.max(leftMax[leftMax.length - 1], rightMax[0]);
+        int horizontalMax = buildingHeights.length;
+        int index = 0;
+        while (index < verticalMax) {
+            for (int i = 0; i < horizontalMax; i++) {
+                delay(50);
+                int maxTwo = Math.min(leftMax[i], rightMax[i]);
+                if (buildingHeights[i] >= (verticalMax - index)) {
+                    System.out.print(GREEN_COLOR + "[H]");
+                } else if (maxTwo >= verticalMax - index) {
+                    System.out.print(RED_COLOR + "[@]");
+                } else {
+                    System.out.print("   ");
+                }
+            }
+            System.out.println();
             index++;
         }
-        System.out.println("snow quantity :" + snowQuantity);
+
+        index = 0;
+        int snowQuantity = 0;
+        while (index < horizontalMax) {
+            int maxTwo = Math.min(leftMax[index], rightMax[index]);
+
+            snowQuantity += (maxTwo - buildingHeights[index]);
+            System.out.printf(MAGENTA + "[%d]", (maxTwo - buildingHeights[index]));
+            index++;
+        }
+        System.out.printf(GREEN_COLOR + " = [%3d]", snowQuantity);
+    }
+
+    public static void main(String[] args) {
+
+        BuildingsAndSnow buildingsAndSnow = new BuildingsAndSnow();
+        buildingsAndSnow.displayProblemAndApproach();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(GREEN_COLOR + "Number of building in series:?");
+        int numberOfBuilds = scanner.nextInt();
+        int[] buildingHeights = new int[numberOfBuilds];
+        int index = 0;
+        System.out.println("Enter corresponding heights:");
+        while (index < numberOfBuilds) {
+            buildingHeights[index] = scanner.nextInt();
+            index++;
+        }
+
+        System.out.printf("\nSnow quantity: [%d]\n", buildingsAndSnow.calculateMaximumSnowQuantity(buildingHeights));
+        scanner.close();
     }
 }
