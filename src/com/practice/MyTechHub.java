@@ -1,5 +1,8 @@
 package com.practice;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public interface MyTechHub {
 
     String GREEN_COLOR="\u001B[32m";
@@ -10,6 +13,12 @@ public interface MyTechHub {
     String MAGENTA="\u001b[35m";
     String CYAN_COLOR="\u001b[36m";
     String WHITE_COLOR="\u001b[37m";
+
+    Map<Integer, String> COLOR_MAP = Map.of(1, GREEN_COLOR,
+            2, RED_COLOR,
+            3, WHITE_COLOR,
+            4, MAGENTA,
+            5,YELLOW_COLOR);
 
     default void displayProblemAndApproach() {
         System.out.println(RED_COLOR + "\nProblem: " + this.getProblem());
@@ -35,7 +44,11 @@ public interface MyTechHub {
         try {
             Thread.sleep(milliSec);
         } catch (InterruptedException ie) {
-
+            System.out.println("running thread got interrupted:" + ie.getMessage());
         }
+    }
+
+    default String getColor(int index){
+        return COLOR_MAP.get(index);
     }
 }
