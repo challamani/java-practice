@@ -20,13 +20,19 @@ public interface MyTechHub {
             4, MAGENTA,
             5,YELLOW_COLOR);
 
+
+    default String getProblem() {
+        return "";
+    }
+
+    default String getApproach() {
+        return "";
+    }
+
     default void displayProblemAndApproach() {
         System.out.println(RED_COLOR + "\nProblem: " + this.getProblem());
         System.out.println(GREEN_COLOR + "Solution: " + this.getApproach());
     }
-    public String getProblem();
-    public String getApproach();
-
     default void endCard(){
         System.out.println(GREEN_COLOR + "\nPlease like the video if you find it useful!");
     }
