@@ -14,11 +14,11 @@ public interface MyTechHub {
     String CYAN_COLOR="\u001b[36m";
     String WHITE_COLOR="\u001b[37m";
 
-    Map<Integer, String> COLOR_MAP = Map.of(1, GREEN_COLOR,
-            2, RED_COLOR,
+    Map<Integer, String> COLOR_MAP = Map.of(0, RED_COLOR, 1, GREEN_COLOR,
+            2, GREEN_COLOR,
             3, WHITE_COLOR,
             4, MAGENTA,
-            5,YELLOW_COLOR);
+            5, BLUE_COLOR, 6, GREEN_COLOR, 7, RED_COLOR, 8, YELLOW_COLOR, 9,GREEN_COLOR);
 
 
     default String getProblem() {
