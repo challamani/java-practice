@@ -1,29 +1,34 @@
 package com.practice.collections;
 
-public class ReverseLinkedList {
 
+import com.practice.MyTechHub;
 
-    public static void main(String[] args) {
-        Node head = new Node("Apple", null);
+public class ReverseLinkedList implements MyTechHub {
+
+    public String getProblem() {
+        return "Reverse the given linked list";
+    }
+
+    public String getApproach() {
+        return "Traverse the entire linked list and \n" +
+                " change the next element accordingly.";
+    }
+
+    public Node createLinkedList(String[] elements) {
+        Node head = new Node(elements[0], null);
         Node current = head;
-        String[] elements = {"Orange", "Banana", "Mango", "Grape", "Guava"};
-
-        for (String s : elements) {
-            Node temp = new Node(s, null);
-            current.setNext(temp);
-            current = temp;
+        for (int index = 1; index < elements.length; index++) {
+            Node next = new Node(elements[index], null);
+            current.setNext(next);
+            current = next;
         }
-
         current = head;
-        while (current.getNext() != null) {
-            System.out.print(current.getData().concat("-->"));
-            current = current.getNext();
-        }
-        System.out.println(current.getData());
+        return current;
+    }
 
+    public Node reverseLinkedList(Node head) {
 
-        //reverse the linked-list
-        current = head;
+        Node current = head;
         Node previous = null;
         while (current != null) {
             Node next = current.getNext();
@@ -31,32 +36,45 @@ public class ReverseLinkedList {
             previous = current;
             current = next;
         }
-
         current = previous;
-        while (current.getNext() != null) {
-            System.out.print(current.getData().concat("-->"));
-            current = current.getNext();
-        }
-        System.out.println(current.getData());
+        return current;
     }
+
+    public static void main(String[] args) {
+        ReverseLinkedList reverseLinkedList = new ReverseLinkedList();
+        String[] elements = {"Apple", "Banana", "Grapes", "Mango", "Orange"};
+        reverseLinkedList.displayProblemAndApproach();
+
+        Node current = reverseLinkedList.createLinkedList(elements);
+        System.out.println("\n LinkedList: \n" + current);
+
+        current = reverseLinkedList.reverseLinkedList(current);
+        System.out.println("\n Reversed LinkedList: \n" + current);
+        reverseLinkedList.endCard();
+    }
+
 }
 
-
-class Node{
-    private String data;
+class Node {
+    private String date;
     private Node next;
 
-    public Node(String data, Node next) {
-        this.data = data;
+    public Node(String date, Node next) {
+        this.date = date;
         this.next = next;
     }
 
-    public String getData() {
-        return data;
+    @Override
+    public String toString() {
+        return "[" + date + ']' + "=>>" + next;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public Node getNext() {
@@ -67,5 +85,24 @@ class Node{
         this.next = next;
     }
 
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
