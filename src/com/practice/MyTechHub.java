@@ -1,6 +1,5 @@
 package com.practice;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public interface MyTechHub {

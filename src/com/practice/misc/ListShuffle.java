@@ -1,4 +1,4 @@
-package com.practice.misc_questions;
+package com.practice.misc;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
