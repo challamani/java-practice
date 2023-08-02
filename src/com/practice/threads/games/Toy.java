@@ -154,7 +154,7 @@ class FallThread extends Thread implements MyTechHub{
                             c.getCol(),
                             c.getCh());
                     delay(ThreadLocalRandom.current()
-                            .nextInt(50, 150));
+                            .nextInt(30, 100));
                     System.out.printf("%s %c[%d;%df %c",
                             c.getColor(),
                             escCode,
