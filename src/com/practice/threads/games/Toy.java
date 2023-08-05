@@ -2,13 +2,11 @@ package com.practice.threads.games;
 
 import com.practice.MyTechHub;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Toy implements MyTechHub {
 
@@ -55,6 +53,13 @@ public class Toy implements MyTechHub {
         rightLeg.start();
         leftLeg.start();
 
+        IntStream.of(10,20,30,40).forEach(row -> {
+            TinyToy right = new TinyToy(row, 50, 40);
+            right.start();
+            TinyToy left = new TinyToy(row, 10, 40);
+            left.start();
+        });
+
         leftHand.join();
         rightHand.join();
 
@@ -63,21 +68,134 @@ public class Toy implements MyTechHub {
         fallThread.start();
         fallThread.join();
 
-        //rebuild the fallen toy
-        //before rebuild we have to make sure
-        //toy is fallen fully
+
+
+        List<Integer> intValues =
+                IntStream.range(20,45).boxed().collect(Collectors.toList());
+        intValues.addAll(IntStream.range(20,45).boxed().toList());
+
+        Collections.shuffle(intValues);
+        intValues.forEach(column -> {
+            new FlowersThread(List.of('❄','✡','♾'),
+                    5, column,
+                    "left",1,
+                    "\u001B[33m").start();
+
+            new FlowersThread(List.of('✲','❇','✪'),
+                    5, column+2,
+                    "right",1
+                    ,"\u001B[37m").start();
+
+            new FlowersThread(List.of('✩','✻','✢','∞'),
+                    5, column-2,
+                    "left",1,
+                    "\u001B[35m").start();
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
         for (Thread thread : fallThread.getChildThreads()) {
             thread.join();
         }
-        BuildThread buildThread = new BuildThread(mapOfPositions);
-        buildThread.start();
     }
 }
 
+class FlowersThread extends Thread implements  MyTechHub {
+
+    private List<Character> characters;
+    private final int row;
+    private final int column;
+    private String direction;
+    private int controlValue;
+    private String color;
+    public FlowersThread(List<Character> characters,
+                         int row,
+                         int column,
+                         String direction,
+                         int controlValue,
+                         String color) {
+        this.characters = characters;
+        this.row = row;
+        this.column = column;
+        this.direction = direction;
+        this.controlValue = controlValue;
+        this.color = color;
+    }
+
+    @Override
+    public void run() {
+
+        int row = this.row;
+        int column = this.column;
+        char escChar = 0x1B;
+        int length = characters.size();
+
+        int[][] position = new int[length][2];
+        int[][] previous = new int[length][2];
+        for (int i = 0; i < characters.size(); i++) {
+            if (direction.equals("left")) {
+                column--;
+            } else {
+                column++;
+            }
+            position[i][0] = row;
+            position[i][1] = column;
+        }
+
+        int index = 0;
+        int twistControl = 0;
+        String direction = this.direction;
+        while (index++ <= 60) {
+            previous[0][0] = position[0][0];
+            previous[0][1] = position[0][1];
+
+            twistControl++;
+            if (twistControl == controlValue) {
+                twistControl = 0;
+                direction = direction.equals("right") ? "left" : "right";
+            }
+            if (direction.equals("left")) {
+                position[0][0] += 1;
+                position[0][1] -= 1;
+            } else {
+                position[0][0] += 1;
+                position[0][1] += 1;
+            }
+
+            Character character = characters.get(0);
+            System.out.printf("%s %c[%d;%df %c",
+                    color,
+                    escChar,
+                    position[0][0],
+                    position[0][1],
+                    character);
+
+            for (int i = 1; i < characters.size(); i++) {
+                previous[i][0] = position[i][0];
+                previous[i][1] = position[i][1];
+                position[i][0] = previous[i - 1][0];
+                position[i][1] = previous[i - 1][1];
+                System.out.printf("%s %c[%d;%df %c",
+                        color,
+                        escChar,
+                        position[i][0],
+                        position[i][1],
+                        characters.get(i));
+            }
+            System.out.printf("%s %c[%d;%df %c",
+                    color,
+                    escChar,
+                    previous[length - 1][0],
+                    previous[length - 1][1],
+                    ' ');
+            delay(ThreadLocalRandom.current().nextInt(60, 100));
+        }
+    }
+}
 class BuildThread extends Thread implements MyTechHub{
-
     Map<String, List<CharPosition>> mapOfPositions;
-
     public BuildThread(Map<String, List<CharPosition>> mapOfPositions){
         this.mapOfPositions = mapOfPositions;
     }
@@ -173,6 +291,65 @@ class FallThread extends Thread implements MyTechHub{
     }
 }
 
+class TinyToy extends Thread implements  MyTechHub{
+
+    private final int row;
+    private final int col;
+    private final int iterations;
+    public TinyToy(int row, int col, int iterations){
+        this.row = row;
+        this.col = col;
+        this.iterations = iterations;
+    }
+
+    @Override
+    public void run() {
+        int index = 0;
+        char escCode = 0x1B;
+        String color = getColor(3);
+
+        while (index++ <= iterations) {
+            displayChar(color, escCode, row, col, "☺");
+            displayChar(color, escCode, row, col - 2, "\\");
+            displayChar(color, escCode, row, col + 2, "/");
+
+            displayChar(color, escCode, row + 1, col, "▓");
+
+            displayChar(color, escCode, row + 2, col - 2, "/");
+            displayChar(color, escCode, row + 2, col + 2, "\\");
+
+            delay(200);
+            displayChar(color, escCode, row, col - 2, " ");
+            displayChar(color, escCode, row, col + 2, " ");
+
+            displayChar(color, escCode, row + 2, col - 2, " ");
+            displayChar(color, escCode, row + 2, col + 2, " ");
+
+            displayChar(color, escCode, row + 1, col - 2, "/");
+            displayChar(color, escCode, row + 1, col + 2, "\\");
+
+            displayChar(color, escCode, row + 2, col, "‼");
+            delay(200);
+
+            displayChar(color, escCode, row + 1, col - 2, " ");
+            displayChar(color, escCode, row + 1, col + 2, " ");
+            displayChar(color, escCode, row + 2, col, " ");
+        }
+    }
+
+    private void displayChar(String color,
+                             char escCode,
+                             int r,
+                             int c,
+                             String display) {
+        System.out.printf("%s %c[%d;%df%s",
+                color,
+                escCode,
+                r,
+                c,
+                display);
+    }
+}
 class HeadThread extends Thread implements MyTechHub{
 
     private final int height;
@@ -190,10 +367,10 @@ class HeadThread extends Thread implements MyTechHub{
     @Override
     public void run(){
         char escChar= 0x1B;
-        char ch = 'O';
+        char ch = '☺';
         int index=0;
 
-        String color = getColor(5);
+        String color = getColor(3);
         clearScreen();
         int localRow = row;
         while(index++ <= height) {
@@ -259,7 +436,7 @@ class BodyThread extends Thread implements MyTechHub{
     @Override
     public void run(){
         char escChar= 0x1B;
-        char ch = '@';
+        char ch = '▓';
         int index=0;
 
         String color = getColor(3);
