@@ -9,8 +9,9 @@ public class SynchronizedExec {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		SynchronizeAccount account = new SynchronizeAccount("321329","Sai Sree","Savings",10000.00);
-		logger.info("Initial Account:"+account.toString());
+		SynchronizeAccount account = new SynchronizeAccount("321329",
+				"Sai Ram","Savings",10000.00);
+		logger.info("Initial Account:"+ account);
 
     	new SyncDepositThread(account,"D-Sai younger brother",3000).start();
         new SyncDepositThread(account,"D-Father",3000).start();

@@ -63,7 +63,6 @@ public class SynchronizeAccount {
         if(amount > this.getBalance()){
             throw new Exception("Insufficient funds");
         }
-
         this.balance -= amount;
         return this.balance;
     }
@@ -73,7 +72,6 @@ public class SynchronizeAccount {
         if(0 > amount){
             throw new Exception("Invalid amount, must be positive integer");
         }
-
         this.balance += amount;
         return this.balance;
     }

@@ -32,16 +32,12 @@ public class PascalTriangle implements MyTechHub {
         return n * factorial(n-1);
     }
 
-    //Print pascal triangle using arrays
     public void approach2(int range){
-        //declare an array
         int[][] ncr = new int[range][];
-        //init array size for each row
         for(int i=0; i<range; i++){
             ncr[i] = new int[i+1];
         }
 
-        //calculate the pascal triangle values
         for(int n=0; n<range; n++){
             for(int r=0; r<=n; r++){
                 if(r ==0 || r == n){
@@ -52,9 +48,7 @@ public class PascalTriangle implements MyTechHub {
             }
         }
 
-        //print - pascal triangle values
         for(int n=0; n<range; n++){
-            //display alignment
             for(int x=0; x<range-n; x++){
                 System.out.print(" ");
             }
@@ -64,7 +58,6 @@ public class PascalTriangle implements MyTechHub {
             System.out.println();
         }
     }
-
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

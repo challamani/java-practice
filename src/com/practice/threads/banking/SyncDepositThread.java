@@ -25,7 +25,8 @@ public class SyncDepositThread extends Thread {
 
     public void run() {
         try {
-            logger.info("Account Balance at [" + currentThread().getName() + "] " + account.doDeposit(this.depositAmount));
+            logger.info("Account Balance at [" + currentThread().getName() +
+                    "] " + account.doDeposit(this.depositAmount));
         } catch (Exception e) {
             logger.info("exception " + e.getMessage());
         }

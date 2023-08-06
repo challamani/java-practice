@@ -11,7 +11,8 @@ public class DepositThread extends Thread {
 
     private Account account;
     private double depositAmount;
-    public DepositThread(Account account,String threadName,double depositAmount){
+
+    public DepositThread(Account account, String threadName, double depositAmount) {
         super(threadName);
         this.account = account;
         this.depositAmount = depositAmount;
@@ -27,8 +28,8 @@ public class DepositThread extends Thread {
 
     public void run() {
         try {
-            
-            logger.info("Account Balance at [" + currentThread().getName() + "] " + account.doDeposite(this.depositAmount));
+            logger.info("Account Balance at [" + currentThread().getName() + "] "
+                    + account.doDeposite(this.depositAmount));
         } catch (Exception e) {
             logger.info("exception " + e.getMessage());
         }
