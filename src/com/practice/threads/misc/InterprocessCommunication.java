@@ -1,4 +1,4 @@
-package com.practice.threads;
+package com.practice.threads.misc;
 
 
 import com.practice.MyTechHub;
