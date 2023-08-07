@@ -2,6 +2,8 @@ package com.practice.threads.misc;
 
 import com.practice.MyTechHub;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class XLogo {
 
     public static void main(String[] args) {
@@ -33,7 +35,7 @@ class XLeftThread extends Thread implements MyTechHub {
                     escCode,
                     --localRow,
                     col,
-                    '/');
+                    '✘');
             delay(200);
         }
         System.out.println();
@@ -56,31 +58,66 @@ class XRightThread extends Thread implements MyTechHub {
         int localRow = row;
         String color = getColor(3);
 
-        for(int col=(column+20); col>=(column); col--){
+        for(int col=(column+20); col>=(column); col--) {
             localRow--;
-            System.out.printf("%s %c[%d;%df %c",
-                    color,
-                    escCode,
-                    localRow,
-                    col,
-                    '\\');
-
-            System.out.printf("%s %c[%d;%df %c",
-                    color,
-                    escCode,
-                    localRow,
-                    col+2,
-                    '\\');
+            displayChar(color, escCode, localRow, col);
+            displayChar(color, escCode, localRow, col + 3);
             delay(200);
         }
 
-        new XRightThreadPart(30, 20)
-                .start();
-
-        color = getColor(4);
         int index=0;
-        localRow = (row/2)+4;
-        int localCol = column+(column/2)-2;
+        while (++index <= 9) {
+            localRow = row;
+            color = getColor(index);
+
+            new XRightWing2(30, 20,
+                    color).start();
+            new XRightWing1(30, 20,
+                    color).start();
+
+            for (int col = (column + 20); col >= (column); col--) {
+                localRow--;
+                displayChar(color, escCode, localRow, col);
+                displayChar(color, escCode, localRow, col + 3);
+                delay(ThreadLocalRandom.current()
+                        .nextInt(100, 200));
+            }
+        }
+
+        System.out.println();
+        delay(3000);
+    }
+
+    private void displayChar(String color,
+                             char escCode,
+                             int r, int c){
+        System.out.printf("%s %c[%d;%df %c",
+                color,
+                escCode,
+                r,
+                c,
+                '✘');
+    }
+}
+
+class XRightWing1 extends Thread implements MyTechHub {
+
+    private final int row;
+    private final int column;
+    private final String color;
+    public XRightWing1(int row, int column, String color){
+        this.row = row;
+        this.column = column;
+        this.color = color;
+    }
+
+    @Override
+    public void run(){
+        int index=0;
+        int localRow = (row/2)+4;
+        int localCol = column+(column/2)-3;
+        char escCode=0X1B;
+
         while (++index <= 10) {
             localRow++;
             localCol--;
@@ -89,17 +126,17 @@ class XRightThread extends Thread implements MyTechHub {
             for (int i = 0; i <= 9; i++) {
                 innerRow--;
                 innerCol--;
-                displayChar(color, escCode, innerRow, innerCol, '\\');
-                displayChar(color, escCode, innerRow, innerCol+2, '\\');
+                displayChar(color, escCode, innerRow, innerCol, '✘');
+                displayChar(color, escCode, innerRow, innerCol+3, '✘');
             }
-            delay(200);
+            delay(150);
             innerRow = localRow;
             innerCol = localCol;
             for (int i = 0; i <= 9; i++) {
                 innerRow--;
                 innerCol--;
                 displayChar(color, escCode, innerRow, innerCol, ' ');
-                displayChar(color, escCode, innerRow, innerCol+2, ' ');
+                displayChar(color, escCode, innerRow, innerCol+3, ' ');
             }
         }
 
@@ -113,21 +150,20 @@ class XRightThread extends Thread implements MyTechHub {
             for (int i = 0; i <= 9; i++) {
                 innerRow--;
                 innerCol--;
-                displayChar(color, escCode, innerRow, innerCol, '\\');
-                displayChar(color, escCode, innerRow, innerCol+2, '\\');
+                displayChar(color, escCode, innerRow, innerCol, '✘');
+                displayChar(color, escCode, innerRow, innerCol+3, '✘');
             }
-            delay(200);
+            delay(150);
             innerRow = localRow;
             innerCol = localCol;
             for (int i = 0; i <= 9; i++) {
                 innerRow--;
                 innerCol--;
                 displayChar(color, escCode, innerRow, innerCol, ' ');
-                displayChar(color, escCode, innerRow, innerCol+2, ' ');
+                displayChar(color, escCode, innerRow, innerCol+3, ' ');
             }
         }
         System.out.println();
-        delay(3000);
     }
 
     private void displayChar(String color,
@@ -142,24 +178,23 @@ class XRightThread extends Thread implements MyTechHub {
     }
 }
 
-class XRightThreadPart extends Thread implements MyTechHub {
+class XRightWing2 extends Thread implements MyTechHub {
 
     private final int row;
     private final int column;
-
-    public XRightThreadPart(int row, int column){
+    private final String color;
+    public XRightWing2(int row, int column, String color){
         this.row = row;
         this.column = column;
+        this.color = color;
     }
 
     @Override
     public void run(){
         char escCode = 0X1B;
-        String color = getColor(4);
-
         int index=0;
         int localRow = (row/2)+4;
-        int localCol = column+(column/2)+2;
+        int localCol = column+(column/2)+3;
 
         while (++index <= 10) {
             localRow--;
@@ -170,17 +205,17 @@ class XRightThreadPart extends Thread implements MyTechHub {
             for (int i = 0; i <= 9; i++) {
                 innerRow++;
                 innerCol++;
-                displayChar(color, escCode, innerRow, innerCol, '\\');
-                displayChar(color, escCode, innerRow, innerCol+2, '\\');
+                displayChar(color, escCode, innerRow, innerCol, '✘');
+                displayChar(color, escCode, innerRow, innerCol+3, '✘');
             }
-            delay(200);
+            delay(150);
             innerRow = localRow;
             innerCol = localCol;
             for (int i = 0; i <= 9; i++) {
                 innerRow++;
                 innerCol++;
                 displayChar(color, escCode, innerRow, innerCol, ' ');
-                displayChar(color, escCode, innerRow, innerCol+2, ' ');
+                displayChar(color, escCode, innerRow, innerCol+3, ' ');
             }
         }
 
@@ -194,17 +229,17 @@ class XRightThreadPart extends Thread implements MyTechHub {
             for (int i = 0; i <= 9; i++) {
                 innerRow++;
                 innerCol++;
-                displayChar(color, escCode, innerRow, innerCol, '\\');
-                displayChar(color, escCode, innerRow, innerCol+2, '\\');
+                displayChar(color, escCode, innerRow, innerCol, '✘');
+                displayChar(color, escCode, innerRow, innerCol+3, '✘');
             }
-            delay(200);
+            delay(150);
             innerRow = localRow;
             innerCol = localCol;
             for (int i = 0; i <= 9; i++) {
                 innerRow++;
                 innerCol++;
                 displayChar(color, escCode, innerRow, innerCol, ' ');
-                displayChar(color, escCode, innerRow, innerCol+2, ' ');
+                displayChar(color, escCode, innerRow, innerCol+3, ' ');
             }
         }
         System.out.println();
