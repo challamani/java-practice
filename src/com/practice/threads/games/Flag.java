@@ -1,6 +1,7 @@
 package com.practice.threads.games;
 
 import com.practice.MyTechHub;
+import com.practice.threads.util.CharPosition;
 
 import java.util.HashMap;
 import java.util.List;

@@ -50,7 +50,7 @@ public class Statue {
 				quarter1.add(new Coordinate(x, y));
 			else if(x < 0 && y >=0)
 				quarter2.add(new Coordinate(x, y));
-			else if(x >=0 && y < 0)
+			else if(x >=0)
 				quarter4.add(new Coordinate(x, y));
 			else 
 				quarter3.add(new Coordinate(x, y));
