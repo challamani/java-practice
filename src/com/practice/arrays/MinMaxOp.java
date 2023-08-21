@@ -6,12 +6,14 @@ public class MinMaxOp implements MyTechHub {
 
     @Override
     public String getProblem() {
-        return "Find the min and max value from the given input array[]";
+        return "Find the min and max " +
+                "value from the given input array[]";
     }
 
     @Override
     public String getApproach() {
-        return "comparing each element of an array in a loop O(n)";
+        return "comparing each element " +
+                "of an array in a loop O(n)";
     }
 
     public void printMinMax(int[] input){

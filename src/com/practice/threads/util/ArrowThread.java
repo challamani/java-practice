@@ -5,7 +5,7 @@ import com.practice.MyTechHub;
 public class ArrowThread extends Thread implements MyTechHub {
     private final int row;
     private final int column;
-    private final char display;
+    private final String display;
     private final String direction;
     private final String color;
     private final int delay;
@@ -14,7 +14,7 @@ public class ArrowThread extends Thread implements MyTechHub {
 
     public ArrowThread(int row,
                        int column,
-                       char display,
+                       String display,
                        String direction,
                        String color,
                        int delay,
@@ -43,14 +43,14 @@ public class ArrowThread extends Thread implements MyTechHub {
                 case "LEFT" -> colLocal--;
                 case "RIGHT" -> colLocal++;
             }
-            System.out.printf("%s %c[%d;%df %c",
+            System.out.printf("%s %c[%d;%df %s",
                     color,
                     escCode,
                     rowLocal,
                     colLocal,
                     display);
             delay(delay);
-            System.out.printf("%s %c[%d;%df %c",
+            System.out.printf("%s %c[%d;%df %s",
                     color,
                     escCode,
                     rowLocal,

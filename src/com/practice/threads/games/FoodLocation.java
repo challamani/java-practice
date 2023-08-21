@@ -15,8 +15,8 @@ public class FoodLocation {
         yLimit = yBoundary;
     }
     public void produceFood() {
-        row = new Random().nextInt(15, xLimit - 15);
-        col = new Random().nextInt(15, yLimit - 15);
+        row = new Random().nextInt(10, xLimit - 10);
+        col = new Random().nextInt(10, yLimit - 10);
     }
 
     public void consumeFood() {

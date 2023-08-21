@@ -14,13 +14,14 @@ public class Client implements MyTechHub {
     public static void main(String[] args) {
         try {
             String ipAddress = args[0];
-
             Scanner scanner = new Scanner(System.in);
             InetAddress ip = InetAddress.getByName(ipAddress);
             Socket socket = new Socket(ip, 5056);
 
-            DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-            DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            DataInputStream dataInputStream = new DataInputStream(
+                    socket.getInputStream());
+            DataOutputStream dataOutputStream = new DataOutputStream(
+                    socket.getOutputStream());
 
             AtomicBoolean receiveStatus = new AtomicBoolean(true);
             Thread receiverThread = new Thread(() -> {

@@ -25,16 +25,22 @@ public class MultiThreadSort {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Thread :: " + first.getName() + "::" + "first-segment :: " + firstSegment.getOutput().toString());
-        System.out.println("Thread :: " + second.getName() + "::" + "second-segment :: " + secondSegment.getOutput().toString());
+        System.out.println("Thread :: " + first.getName() + "::" +
+                "first-segment :: " + firstSegment.getOutput().toString());
+        System.out.println("Thread :: " + second.getName() + "::" +
+                "second-segment :: " + secondSegment.getOutput().toString());
 
-        Integer[] firstOutputArray = firstSegment.getOutput().toArray(new Integer[firstSegment.getOutput().size()]);
-        Integer[] secondOutputArray = secondSegment.getOutput().toArray(new Integer[secondSegment.getOutput().size()]);
+        Integer[] firstOutputArray = firstSegment.getOutput()
+                .toArray(new Integer[0]);
+        Integer[] secondOutputArray = secondSegment.getOutput()
+                .toArray(new Integer[0]);
         Integer[] finalOutput = new Integer[firstOutputArray.length + secondOutputArray.length];
 
-        System.out.println("Before :: "+Arrays.asList(finalOutput).toString());
-        Thread forwardThread = new Thread(new ForwardMerge(firstOutputArray, secondOutputArray, finalOutput), "forward-thread");
-        Thread backwardThread = new Thread(new BackwardMerge(firstOutputArray, secondOutputArray, finalOutput), "backward-thread");
+        System.out.println("Before :: "+ Arrays.asList(finalOutput));
+        Thread forwardThread = new Thread(new ForwardMerge(firstOutputArray, secondOutputArray, finalOutput)
+                , "forward-thread");
+        Thread backwardThread = new Thread(new BackwardMerge(firstOutputArray, secondOutputArray, finalOutput)
+                , "backward-thread");
         try {
             forwardThread.start();
             backwardThread.start();
@@ -113,7 +119,8 @@ class BackwardMerge implements Runnable {
     public void run() {
 
         int mid = (first.length + second.length) / 2;
-        for (int i = ((first.length + second.length) - 1), p = (first.length - 1), q = (second.length - 1); i > mid; i--) {
+        for (int i = ((first.length + second.length) - 1), p = (first.length - 1),
+             q = (second.length - 1); i > mid; i--) {
 
             if (first[p] >= second[q]) {
                 output[i] = first[p];

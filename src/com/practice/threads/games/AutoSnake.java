@@ -1,7 +1,5 @@
 package com.practice.threads.games;
-
 import com.practice.MyTechHub;
-
 import java.util.ArrayDeque;
 import java.util.Queue;
 
@@ -10,14 +8,14 @@ public class AutoSnake {
     public static void main(String[] args) {
         Queue<Target> targetQueue = new ArrayDeque<>();
         int start = 6;
-        int colBoundary = 50;
-        int rowBoundary = 50;
+        int colBoundary = 35;
+        int rowBoundary = 35;
         int maxFoodItems = 100;
         FoodLocation foodLocation = new FoodLocation
                 (colBoundary, rowBoundary);
         new FoodGenThread(maxFoodItems, foodLocation, "\uD83C\uDF54")
                 .start();
-        char display = '@';
+        char display = 'Ø';
         int row = 10;
         int col = 10;
         int length = 12;
