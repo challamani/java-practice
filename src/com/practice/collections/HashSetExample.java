@@ -8,29 +8,23 @@ import java.util.Set;
 public class HashSetExample {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Set<Employee> set  = new HashSet<>();
-		set.add(new Employee("Sree","A",24));
-		set.add(new Employee("Mani","B",27));
-		set.add(new Employee("Mani","B",27));
-				
-		for(Employee employee:set){
-			System.out.println(employee.toString());
-		}
-		
+
+		Set<Employee> employeeSet  = new HashSet<>();
+		employeeSet.add(new Employee("Bob","A",24));
+		employeeSet.add(new Employee("Foo","B",27));
+		employeeSet.add(new Employee("Maha","C",27));
+
 		Map<String, Employee> employeeMap = new HashMap<String,Employee>();
-		employeeMap.put("A", new Employee("Sree","A",24));
-		employeeMap.put("B", new Employee("Sree","B",24));
-		
-		
-		for(Map.Entry<String,Employee> entry: employeeMap.entrySet()){
-			System.out.println("Key:"+entry.getKey()+","+entry.getValue());
+		employeeMap.put("A", new Employee("Bob","A",24));
+		employeeMap.put("B", new Employee("Foo","B",24));
+
+		for(Map.Entry<String,Employee> entry: employeeMap.entrySet()) {
+			System.out.printf("Key: %s value: %s",
+					entry.getKey(), entry.getValue());
 		}
-		
 	}
 
 }
-
 
 class Employee{
 	private String name;
@@ -61,9 +55,7 @@ class Employee{
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -95,8 +87,8 @@ class Employee{
 	}
 	@Override
 	public String toString() {
-		return "Employee [name=" + name + ", id=" + id + ", age=" + age + "]";
+		return "Employee [name=" + name +
+				", id=" + id +
+				", age=" + age + "]";
 	}
-	
-	
 }

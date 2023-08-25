@@ -10,10 +10,8 @@ public class Football implements MyTechHub {
 
     public static void main(String[] args) {
 
-        //웃
-        //유
+        //웃유
         //⚽🏀
-
         PlayerThread player1 = new PlayerThread(
                         5,
                         10,

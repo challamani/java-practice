@@ -13,9 +13,9 @@ public class AutoSnake {
         int maxFoodItems = 100;
         FoodLocation foodLocation = new FoodLocation
                 (colBoundary, rowBoundary);
-        new FoodGenThread(maxFoodItems, foodLocation, "\uD83C\uDF54")
+        new FoodGenThread(maxFoodItems, foodLocation, "⚽")
                 .start();
-        char display = 'Ø';
+        char display ='꙰';
         int row = 10;
         int col = 10;
         int length = 12;
@@ -267,7 +267,7 @@ class FoodGenThread extends Thread implements MyTechHub {
                 0x1B,
                 3,
                 3,
-                "Burgers in Snake account: "+swallowedEggs);
+                "Score: "+swallowedEggs);
     }
 
     private void setTarget(String direction, int currentRow, int currentCol){

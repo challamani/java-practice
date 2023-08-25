@@ -8,11 +8,13 @@ import java.util.Scanner;
 public class Stack implements MyTechHub {
 
     public String getProblem() {
-        return "Implement the Stack using LinkedList";
+        return "Implement the Stack " +
+                "using LinkedList";
     }
 
     public String getApproach() {
-        return "Head node is to define the peek element";
+        return "Head node is to define " +
+                "the peek element";
     }
 
     private Node head;
@@ -93,31 +95,5 @@ public class Stack implements MyTechHub {
             }
         } while (option <= 4);
         stack.endCard();
-    }
-}
-
-class Node {
-    private String data;
-    private Node next;
-
-    public Node(String data, Node next) {
-        this.data = data;
-        this.next = next;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public Node getNext() {
-        return next;
-    }
-
-    public void setNext(Node next) {
-        this.next = next;
     }
 }

@@ -1,4 +1,4 @@
-package com.practice.collections;
+package com.practice.ds;
 
 
 import com.practice.MyTechHub;
@@ -42,47 +42,19 @@ public class ReverseLinkedList implements MyTechHub {
 
     public static void main(String[] args) {
         ReverseLinkedList reverseLinkedList = new ReverseLinkedList();
-        String[] elements = {"Apple", "Banana", "Grapes", "Mango", "Orange"};
-        reverseLinkedList.displayProblemAndApproach();
+        String[] elements = {"Apple",
+                "Banana",
+                "Grapes",
+                "Mango",
+                "Orange"};
 
+        reverseLinkedList.displayProblemAndApproach();
         Node current = reverseLinkedList.createLinkedList(elements);
         System.out.println("\n LinkedList: \n" + current);
 
         current = reverseLinkedList.reverseLinkedList(current);
         System.out.println("\n Reversed LinkedList: \n" + current);
         reverseLinkedList.endCard();
-    }
-
-}
-
-class Node {
-    private String date;
-    private Node next;
-
-    public Node(String date, Node next) {
-        this.date = date;
-        this.next = next;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + date + ']' + "=>>" + next;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public Node getNext() {
-        return next;
-    }
-
-    public void setNext(Node next) {
-        this.next = next;
     }
 
 }
