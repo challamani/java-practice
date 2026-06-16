@@ -1,4 +1,4 @@
-package com.practice.code100days;
+package com.practice.arrays;
 
 import com.practice.MyTechHub;
 

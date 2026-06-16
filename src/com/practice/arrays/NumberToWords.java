@@ -31,7 +31,7 @@ public class NumberToWords {
         }
         if(value >= 100){
             int len = Long.toString(value).length();
-            int quotient =(int) value/divisor[len];
+            long quotient = value/divisor[len];
 
             wordBuilder
                     .append(" ")
@@ -40,7 +40,7 @@ public class NumberToWords {
                     .append(" ")
                     .append(words[2][len]);
 
-            int remainder = (int) value % divisor[len];
+            long remainder =  value % divisor[len];
             wordBuilder
                     .append(" ")
                     .append(recursive(remainder,

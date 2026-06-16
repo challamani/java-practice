@@ -17,9 +17,36 @@ public interface MyTechHub {
             2, YELLOW_COLOR,
             3, WHITE_COLOR,
             4, MAGENTA,
-            5, BLUE_COLOR, 6, GREEN_COLOR, 7, RED_COLOR, 8, YELLOW_COLOR, 9,WHITE_COLOR);
+            5, BLUE_COLOR, 6, GREEN_COLOR, 7, RED_COLOR,
+            8, YELLOW_COLOR, 9,WHITE_COLOR);
 
+    default int[] returnLeftMax(int[] elements) {
+        int[] leftMax = new int[elements.length];
+        int index = 0;
+        int leftMaxVal = Integer.MIN_VALUE;
+        while (index < elements.length) {
+            if (leftMaxVal < elements[index]) {
+                leftMaxVal = elements[index];
+            }
+            leftMax[index] = leftMaxVal;
+            index++;
+        }
+        return leftMax;
+    }
 
+    default int[] returnRightMax(int[] elements){
+        int[] rightMax = new int[elements.length];
+        int index = elements.length - 1;
+        int rightMaxVal = Integer.MIN_VALUE;
+        while (index >= 0) {
+            if (rightMaxVal < elements[index]) {
+                rightMaxVal = elements[index];
+            }
+            rightMax[index] = rightMaxVal;
+            index--;
+        }
+        return rightMax;
+    }
     default String getProblem() {
         return "";
     }

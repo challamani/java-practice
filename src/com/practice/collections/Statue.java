@@ -69,12 +69,11 @@ public class Statue {
 	
 	private static int getUniqueSlopeSetCnt(List<Coordinate> quarter){
 
-		//Because of the centre coordinate values are (0,0) the slope formula becomes y2-y1/x2-x1 = y/x
+		//Because of the center coordinate values are (0,0) the slope formula becomes y2-y1/x2-x1 = y/x
 		Set<Float> uniqueSlopeSet = new HashSet<>();
 		for(Coordinate coordinate:quarter){
 			 uniqueSlopeSet.add(coordinate.getY() / coordinate.getX());
 		}
-		
 		return uniqueSlopeSet.size();
 	}
 	

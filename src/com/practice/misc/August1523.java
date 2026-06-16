@@ -26,16 +26,6 @@ class August1523 extends JFrame implements MyTechHub {
         populateLinePoints();
     }
 
-
-
-
-
-
-
-
-
-
-
     private void populateLinePoints(){
         linePointList.add(new LinePoint(255,245,340,245));
         linePointList.add(new LinePoint(295,205,295,290));

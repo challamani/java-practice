@@ -44,8 +44,7 @@ public class MergeSort implements Sort<Integer> {
             int left=start;
             int right=(mid+1);
             int index=0;
-            while (index<=(end-start))
-            {
+            while (index<=(end-start)){
                 if((left <= mid && right <= end) && (input[left] > input[right])){
                     sortedArray[index] = input[right];
                     right++;

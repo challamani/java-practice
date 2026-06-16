@@ -2,13 +2,13 @@ package com.practice.threads.flags;
 
 import com.practice.MyTechHub;
 
-class IndependenceDay extends Thread implements MyTechHub {
+class JanasenaSpecial extends Thread implements MyTechHub {
 
-    private final char[] displayChars;
+    private final String[] displayChars;
     private final int column;
     private final int row;
 
-    public IndependenceDay(char[] displayChars,
+    public JanasenaSpecial(String[] displayChars,
                            int row,
                            int column) {
         this.displayChars = displayChars;
@@ -21,22 +21,22 @@ class IndependenceDay extends Thread implements MyTechHub {
         String color = getColor(1);
         char escCode = 0X1B;
 
-        for (int col = column; col < (column + (2 * displayChars.length));
-             col += 2) {
-            System.out.printf("%s %c[%d;%df %c",
+        for (int col = column; col < (column + (3 * displayChars.length));
+             col += 3) {
+            System.out.printf("%s %c[%d;%df%c",
                     color,
                     escCode,
                     row,
                     col,
-                    '♥');
+                    '✡');
             delay(20);
         }
 
         int rowLocal = row + 30;
         int index = 0;
-        color = getColor(3);
-        for (int col = column; col < (column + (2 * displayChars.length));
-             col += 2) {
+        color = getColor(7);
+        for (int col = column; col < (column + (3 * displayChars.length));
+             col += 3) {
             while (--rowLocal > row) {
                 System.out.printf("%s %c[%d;%df %c",
                         color,
@@ -53,7 +53,7 @@ class IndependenceDay extends Thread implements MyTechHub {
                         ' ');
             }
             if (rowLocal == row) {
-                System.out.printf("%s %c[%d;%df %c",
+                System.out.printf("%s %c[%d;%df %s",
                         color,
                         escCode,
                         row,

@@ -1,6 +1,6 @@
 package com.practice.ds;
 
-class Node {
+public class Node {
     private String data;
     private Node next;
 

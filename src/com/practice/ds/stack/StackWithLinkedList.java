@@ -1,11 +1,12 @@
-package com.practice.ds;
+package com.practice.ds.stack;
 
 import com.practice.MyTechHub;
+import com.practice.ds.Node;
 
 import java.util.Scanner;
 
 
-public class Stack implements MyTechHub {
+public class StackWithLinkedList implements MyTechHub {
 
     public String getProblem() {
         return "Implement the Stack " +
@@ -19,7 +20,7 @@ public class Stack implements MyTechHub {
 
     private Node head;
 
-    public Stack(String[] elements) {
+    public StackWithLinkedList(String[] elements) {
         if (elements == null || elements.length < 1) {
             throw new RuntimeException("Elements not found!");
         }
@@ -67,15 +68,22 @@ public class Stack implements MyTechHub {
     }
 
     public static void main(String[] args) {
-        Stack stack = new Stack(new String[]{"JAVA", "RUBY"});
+        StackWithLinkedList stack = new StackWithLinkedList(new String[]{"JAVA", "RUBY"});
         stack.displayProblemAndApproach();
 
         Scanner scanner = new Scanner(System.in);
         int option;
         do {
-            System.out.println("\n1. Push" +
-                    "\n2. Pop \n3. Peek \n4. Display" +
-                    "\n5. Exit\nYour option:");
+            System.out.println("""
+                    
+                    1. Push
+                    
+                    2. Pop
+                    3. Peek
+                    4. Display
+                    
+                    5. Exit
+                    Your option:""");
             option = scanner.nextInt();
             switch (option) {
                 case 1:

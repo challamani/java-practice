@@ -1,7 +1,8 @@
-package com.practice.ds;
+package com.practice.ds.linkedlist;
 
 
 import com.practice.MyTechHub;
+import com.practice.ds.Node;
 
 public class ReverseLinkedList implements MyTechHub {
 
