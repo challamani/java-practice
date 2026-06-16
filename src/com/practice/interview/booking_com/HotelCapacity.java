@@ -2,7 +2,6 @@ package com.practice.interview.booking_com;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class HotelCapacity {
