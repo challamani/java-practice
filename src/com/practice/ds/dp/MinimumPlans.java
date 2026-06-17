@@ -6,31 +6,30 @@ import java.util.*;
 import java.util.stream.*;
 import static java.util.stream.Collectors.toList;
 
+public class MinimumPlans {
 
-class Result {
+    class Result {
 
-    public static int findMinimumPlansForBandwidth(List<Integer> planSizes, int targetBandwidth) {
-        // Write your code here
-        Collections.sort(planSizes);
+        public static int findMinimumPlansForBandwidth(List<Integer> planSizes, int targetBandwidth) {
+            // Write your code here
+            Collections.sort(planSizes);
 
-        int max = targetBandwidth + 1;
-        int[] prefillPlans = new int[targetBandwidth+1];
-        Arrays.fill(prefillPlans, max);
+            int max = targetBandwidth + 1;
+            int[] prefillPlans = new int[targetBandwidth+1];
+            Arrays.fill(prefillPlans, max);
+            prefillPlans[0] = 0;
 
-        prefillPlans[0] = 0;
-        for(int i=1; i<=targetBandwidth; i++){
-            for(Integer plan: planSizes){
-                if(i >= plan){
-                    prefillPlans[i] = Math.min(prefillPlans[i], prefillPlans[i-plan] + 1);
+            for(int i=1; i<=targetBandwidth; i++){
+                for(Integer plan: planSizes){
+                    if(i >= plan){
+                        prefillPlans[i] = Math.min(prefillPlans[i], prefillPlans[i-plan] + 1);
+                    }
                 }
             }
+            return prefillPlans[targetBandwidth] > targetBandwidth ? -1 : prefillPlans[targetBandwidth];
         }
-        return prefillPlans[targetBandwidth] > targetBandwidth ? -1 : prefillPlans[targetBandwidth];
     }
 
-}
-
-public class MinimumPlans {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         int planSizesCount = Integer.parseInt(bufferedReader.readLine().trim());

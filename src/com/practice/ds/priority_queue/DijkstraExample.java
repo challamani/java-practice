@@ -5,6 +5,15 @@ import java.util.*;
 
 public class DijkstraExample {
 
+    private static class Edge{
+        int weight;
+        int targetNode;
+
+        Edge(int targetNode,int weight){
+            this.weight = weight;
+            this.targetNode = targetNode;
+        }
+    }
 
     private static class Node implements Comparable<Node> {
         int id;
@@ -61,7 +70,7 @@ public class DijkstraExample {
             backtrack = pathMap.get(backtrack); // Move to the person who invited this node
         }
         Collections.reverse(path);
-        System.out.println("Path to target: "+target+" is: "+ path);
+        System.out.printf("Path to target: %d, is: %s \n", target ,path);
         return distances;
     }
 
@@ -76,16 +85,8 @@ public class DijkstraExample {
         graph.put(3, new ArrayList<>());
 
         Map<Integer, Integer> distances = new DijkstraExample().findShortestPath(startNode, graph, backtrack);
-        distances.forEach((node, dist) -> System.out.printf("from star: %d to node: %d, distance is: %d \n", startNode, node, dist));
+        distances.forEach((node, distance) -> System.out.printf("from star: %d to node: %d, distance is: %d \n", startNode, node, distance));
     }
 }
 
-class Edge{
-    int weight;
-    int targetNode;
 
-    Edge(int targetNode,int weight){
-        this.weight = weight;
-        this.targetNode = targetNode;
-    }
-}
